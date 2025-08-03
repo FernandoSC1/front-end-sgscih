@@ -1,5 +1,15 @@
-# Getting Started with Create React App
+## Instalação:
 
+npx create-react-app nome-do-app
+npm install axios 
+npm install react-router-dom
+
+## Para gerar PDF
+npm install jspdf 
+npm install html2canvas
+
+
+# Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -68,3 +78,26 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# CONFIGURANDO A APLICAÇÃO PARA RODAR NA REDE LOCAL
+
+DEVE-SE FAZER FIXAR UM IP AO SERVIDOR
+DEVE-SE COMUNICAR A APLICAÇÃO PARA VER O ENDEREÇO DO SERVIDOR, SOU SEJA, SER SERVIDO PELO SERVIDOR
+
+NO SERVIDOR:
+    - Cria-se variáveis.
+
+    - No '.env' do servidor, crie duas variáveis, a 'HOST' e a 'PORT"
+    - No HOST, coloque o IP da máquina: "HOST=192.168.170.XXX
+    - Na PORT, coloque a porta PORT=5000
+
+NA APLICAÇÃO:
+    Cria-se uma variável e armazene o endereço do SERVIDOR:
+
+    REACT_APP_API_BASE_URL=http://192.168.170.XXX:5000/api;
+
+No arquivo App.js da aplicação, procure por:
+    const API_BASE_URL = 'http://localhost:5000/api';
+
+    e, acrescente, após o igual, o endereço do servidor, mas tendo o endreço do localhost que já tinha. 
