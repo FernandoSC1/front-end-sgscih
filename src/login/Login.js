@@ -34,7 +34,7 @@ function Login({ onLoginSuccess }) {
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
           <input
-            type="email"
+            type="text"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
