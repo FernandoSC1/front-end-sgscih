@@ -101,7 +101,7 @@ const FormularioIRAS = ({ setCurrentPage }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/investigacao-iras', formData);
+      const response = await axios.post(`${API_URL}/api/investigacao-iras`, formData);
       console.log('Formulário de Investigação de IRAS enviado com sucesso!', response.data);
       alert('Formulário de IRAS salvo com sucesso!');
       setCurrentPage('pacienteList');
