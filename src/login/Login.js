@@ -32,7 +32,7 @@ function Login({ onLoginSuccess }) {
         <h2>Login</h2>
         {error && <p className="error-message">{error}</p>}
         <div className="form-group">
-          <label htmlFor="email">E-mail</label>
+          <label htmlFor="email">Usuário</label>
           <input
             type="text"
             id="email"
