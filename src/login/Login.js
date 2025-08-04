@@ -18,7 +18,7 @@ function Login({ onLoginSuccess }) {
 
     // Simulação de login
     console.log('Dados do formulário:', { email, password });
-    if (email === 'teste@teste.com' && password === '123456') {
+    if (email === 'fernando' && password === '12345678') {
       // Chama a função passada como prop
       onLoginSuccess();
     } else {
@@ -34,7 +34,7 @@ function Login({ onLoginSuccess }) {
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
           <input
-            type="email"
+            type="text"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
