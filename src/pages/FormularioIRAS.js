@@ -32,6 +32,7 @@ const FormularioIRAS = ({ setCurrentPage }) => {
     observacoes: '',
   });
 
+  const API_URL = process.env.REACT_APP_API_BASE_URL; 
   const [isPacienteFound, setIsPacienteFound] = useState(false);
 
   const searchPatientData = async () => {
@@ -43,7 +44,7 @@ const FormularioIRAS = ({ setCurrentPage }) => {
 
     try {
       // O campo `sexo` foi adicionado à desestruturação da resposta
-      const response = await axios.get(`REACT_APP_API_BASE_URL/pacientes/numeroZeroDia/${numero}`);
+      const response = await axios.get(`${API_URL}/pacientes/numeroZeroDia/${numero}`);
       const { nome, dataAdmissao, dataNascimento, leito, setor, sexo } = response.data;
       
       const birthDate = new Date(dataNascimento);
