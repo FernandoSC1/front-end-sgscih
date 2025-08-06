@@ -127,6 +127,7 @@ const PacienteDetail = ({ setCurrentPage, selectedPacienteId, setSelectedPacient
         <div className="content-section info-section">
           <h3 className="section-title">Informações do Paciente</h3>
           <p><strong>Nome:</strong> {paciente.nome}</p>
+          <p><strong>Sexo:</strong> {paciente.sexo}</p>
           <p><strong>Número Zero Dia:</strong> {paciente.numeroZeroDia}</p>
           <p><strong>Data de Nascimento:</strong> {formatDate(paciente.dataNascimento)}</p>
           <p><strong>Data de Admissão:</strong> {formatDate(paciente.dataAdmissao)}</p>

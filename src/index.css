@@ -699,8 +699,6 @@ body {
     font-size: 1em;
 }
 
-.app-pdf-header {}
-
 /* Ajustes responsivos para telas menores */
 @media (max-width: 768px) {
     .filter-section {
@@ -809,7 +807,11 @@ body {
 
 .login-form .login-button:hover {
     background-color: #7b2cff;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
+}
+
+.login-form .login-button:active{
+    background-color: #7864eb;
 }
 
 .error-message {
@@ -821,6 +823,12 @@ body {
     margin-bottom: 15px;
     font-size: 0.9em;
     text-align: left;
+}
+
+.footer-page{
+    width: 90%;
+    color: rgb(158, 157, 157);
+    text-align: right;
 }
 
 /* ----------------------------------- */
