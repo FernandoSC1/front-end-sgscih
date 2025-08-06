@@ -18,7 +18,7 @@ function Login({ onLoginSuccess }) {
 
     // Simulação de login
     console.log('Dados do formulário:', { email, password });
-    if (email === 'fernando' && password === '12345678') {
+    if (email === 'fernando' && password === '12345678' || email === 'estagiario' && password === '123456') {
       // Chama a função passada como prop
       onLoginSuccess();
     } else {

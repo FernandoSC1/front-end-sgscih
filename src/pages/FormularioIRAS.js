@@ -32,6 +32,7 @@ const FormularioIRAS = ({ setCurrentPage }) => {
     observacoes: '',
   });
 
+  const API_URL = process.env.REACT_APP_API_BASE_URL; 
   const [isPacienteFound, setIsPacienteFound] = useState(false);
 
   const searchPatientData = async () => {
@@ -43,7 +44,7 @@ const FormularioIRAS = ({ setCurrentPage }) => {
 
     try {
       // O campo `sexo` foi adicionado à desestruturação da resposta
-      const response = await axios.get(`http://localhost:5000/api/pacientes/numeroZeroDia/${numero}`);
+      const response = await axios.get(`${API_URL}/pacientes/numeroZeroDia/${numero}`);
       const { nome, dataAdmissao, dataNascimento, leito, setor, sexo } = response.data;
       
       const birthDate = new Date(dataNascimento);
@@ -100,7 +101,7 @@ const FormularioIRAS = ({ setCurrentPage }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/investigacao-iras', formData);
+      const response = await axios.post(`${API_URL}/api/investigacao-iras`, formData);
       console.log('Formulário de Investigação de IRAS enviado com sucesso!', response.data);
       alert('Formulário de IRAS salvo com sucesso!');
       setCurrentPage('pacienteList');
