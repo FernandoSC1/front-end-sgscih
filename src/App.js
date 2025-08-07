@@ -59,7 +59,6 @@ function App() {
             case 'welcome':
                 return (
                     <div className="container welcome-container">
-                        <h2 className="page-title">Bem-vindo ao Sistema!</h2>
                         <img src="/logo_scih.png" alt="Logo SCIH" className="welcome-logo" />
                     </div>
                 );
