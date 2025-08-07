@@ -117,15 +117,6 @@ const FormularioIRAS = ({ setCurrentPage }) => {
 
   return (
     <div className="container">
-      <div className="painel-header">
-          <button
-            onClick={() => setCurrentPage('pacienteList')}
-            className="button secondary-button"
-          >
-            Voltar
-          </button>
-          <h2 className="page-title">Formulário de Investigação de IRAS</h2>
-            </div>
       <style>{`
         .form-grid input[name="numeroRegistro"],
         .form-grid input[name="dataAdmissao"],
@@ -149,9 +140,16 @@ const FormularioIRAS = ({ setCurrentPage }) => {
           gap: 10px;
         }
       `}</style>
+      <div className="painel-header">
+          <button
+            onClick={() => setCurrentPage('pacienteList')}
+            className="button secondary-button"
+          >
+            Voltar
+          </button>
+      </div>
       <h2 className="page-title">Formulário de Investigação de IRAS</h2>
       <form onSubmit={handleSubmit} className="data-form">
-        
         {/* Seção de Dados do Paciente */}
         <div className="form-section">
           <h3>Dados do Paciente</h3>
