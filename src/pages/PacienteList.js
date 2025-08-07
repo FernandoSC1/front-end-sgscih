@@ -123,7 +123,7 @@ const PacienteList = ({ setCurrentPage, setSelectedPacienteId, searchParams, set
     <div className="container">
       <div className="painel-header">
           <button
-              onClick={() => setCurrentPage('pacienteList')}
+              onClick={() => setCurrentPage('welcome')}
               className="button secondary-button"
           >
               Voltar
