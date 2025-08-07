@@ -43,7 +43,7 @@ function App() {
 
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);
-        setCurrentPage('');
+        setCurrentPage('pacienteList');
     };
 
     // ALTERADO: A função de logout agora limpa o estado da página do localStorage.
@@ -88,7 +88,7 @@ function App() {
             case 'painelGestao':
                 return <PainelGestao setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             default:
-                return <PacienteList setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
+                return <img src="logo_scih.png alt="Logo_SCIH/>;
         }
     };
 
