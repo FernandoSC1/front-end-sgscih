@@ -107,9 +107,6 @@ function App() {
                 <header className="app-header">
                     <h1 className="app-title">Sistema de Gerenciamento SCIH</h1>
                     <nav className="main-nav">
-                        <button onClick={() => { setCurrentPage('painelGestao'); setSelectedPacienteId(null); }} className="nav-button">
-                            Painel de Gestão
-                        </button>
                         <button onClick={handlePatientsButtonClick} className="nav-button">
                             Pacientes
                         </button>
@@ -121,6 +118,9 @@ function App() {
                         </button>
                         <button onClick={() => { setCurrentPage('irasForm'); setSelectedPacienteId(null); }} className="nav-button">
                             Formulário de IRAS
+                        </button>
+                        <button onClick={() => { setCurrentPage('painelGestao'); setSelectedPacienteId(null); }} className="nav-button">
+                            Painel de Gestão
                         </button>
                         <button onClick={handleLogout} className="nav-button-logout-button">
                             Sair
