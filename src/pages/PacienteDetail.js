@@ -98,6 +98,15 @@ const PacienteDetail = ({ setCurrentPage, selectedPacienteId, setSelectedPacient
   return (
     <div className="container">
       <h2 className="page-title">Paciente: {paciente.nome}</h2>
+      <div className="painel-header">
+                <h2 className="page-title">Detalhes do Paciente</h2>
+                <button
+                    onClick={() => setCurrentPage('pacienteList')}
+                    className="button secondary-button"
+                >
+                    Voltar
+                </button>
+            </div>
 
       <div className="button-group top-buttons">
         <button onClick={() => { setSelectedPacienteId(null); setCurrentPage('pacienteList'); }} className="button secondary-button">
