@@ -88,7 +88,7 @@ function App() {
             case 'painelGestao':
                 return <PainelGestao setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             default:
-                return <div><img src="logo_scih.png" alt="Logo_SCIH" /></div>;
+                return
         }
     };
 
