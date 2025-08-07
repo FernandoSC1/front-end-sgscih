@@ -1,6 +1,8 @@
 // components/painel/AtualizacoesDiarias.js
 import React, { useState, useEffect } from 'react';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
+
 const AtualizacoesDiarias = ({ setCurrentPage, setSelectedPacienteId }) => {
     const [atualizacoes, setAtualizacoes] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -9,7 +11,7 @@ const AtualizacoesDiarias = ({ setCurrentPage, setSelectedPacienteId }) => {
     useEffect(() => {
         const fetchAtualizacoes = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/painel/atualizacoes');
+                const response = await fetch(`${API_BASE_URL}/painel/atualizacoes`);
                 if (!response.ok) {
                     throw new Error('Falha ao buscar dados do servidor.');
                 }
