@@ -225,7 +225,6 @@ const handleLeitoBlur = async (e) => {
   return (
     <div className="container">
       <div className="painel-header">
-                <h2 className="page-title">{selectedPacienteId ? 'Editar Paciente' : 'Novo Paciente'}</h2>
                 <button
                     onClick={() => {
                         setCurrentPage('pacienteList');
