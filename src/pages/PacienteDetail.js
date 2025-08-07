@@ -106,7 +106,6 @@ const PacienteDetail = ({ setCurrentPage, selectedPacienteId, setSelectedPacient
                 </button>
             </div>
       <h2 className="page-title">Paciente: {paciente.nome}</h2>
-      <h2 className="page-title">Detalhes do Paciente</h2>
       <div className="button-group top-buttons">
         <button onClick={() => { setSelectedPacienteId(paciente._id); setCurrentPage('pacienteForm'); }} className="button primary-button">
           Editar Dados
