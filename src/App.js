@@ -30,7 +30,7 @@ function App() {
     }, [isLoggedIn]);
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (isLoggedIn && currentPage !== 'welcome') {
             localStorage.setItem('currentPage', currentPage);
             localStorage.setItem('selectedPacienteId', JSON.stringify(selectedPacienteId));
         }
@@ -39,7 +39,6 @@ function App() {
 
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);
-        // Direciona para a nova tela de boas-vindas
         setCurrentPage('welcome'); 
     };
 
@@ -57,10 +56,10 @@ function App() {
 
     const renderPage = () => {
         switch (currentPage) {
-            // NOVO: Case para renderizar a tela de boas-vindas
             case 'welcome':
                 return (
                     <div className="container welcome-container">
+                        <h2 className="page-title">Bem-vindo ao Sistema!</h2>
                         <img src="/logo_scih.png" alt="Logo SCIH" className="welcome-logo" />
                     </div>
                 );
@@ -89,8 +88,6 @@ function App() {
             case 'painelGestao':
                 return <PainelGestao setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             default:
-                // Se um usuário logado recarregar a página, ele vai para a última página salva.
-                // Se for um estado inválido, volta para a lista de pacientes.
                 return <PacienteList setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
         }
     };
@@ -106,30 +103,32 @@ function App() {
 
     return (
         <div className="app-container">
-            {/* O cabeçalho agora aparece em todas as páginas */}
-            <header className="app-header">
-                <h1 className="app-title">Sistema de Gerenciamento SCIH</h1>
-                <nav className="main-nav">
-                    <button onClick={handlePatientsButtonClick} className="nav-button">
-                        Pacientes
-                    </button>
-                    <button onClick={() => { setCurrentPage('pacienteForm'); setSelectedPacienteId(null); }} className="nav-button">
-                        Novo Paciente
-                    </button>
-                    <button onClick={() => { setCurrentPage('transferReport'); setSelectedPacienteId(null); }} className="nav-button">
-                        Relatório de Transferência
-                    </button>
-                    <button onClick={() => { setCurrentPage('irasForm'); setSelectedPacienteId(null); }} className="nav-button">
-                        Formulário de IRAS
-                    </button>
-                    <button onClick={() => { setCurrentPage('painelGestao'); setSelectedPacienteId(null); }} className="nav-button">
-                        Painel de Gestão
-                    </button>
-                    <button onClick={handleLogout} className="nav-button-logout-button">
-                        Sair
-                    </button>
-                </nav>
-            </header>
+            {/* O cabeçalho principal agora aparece SOMENTE na página 'welcome' */}
+            {currentPage === 'welcome' && (
+                <header className="app-header">
+                    <h1 className="app-title">Sistema de Gerenciamento SCIH</h1>
+                    <nav className="main-nav">
+                        <button onClick={() => { setCurrentPage('painelGestao'); setSelectedPacienteId(null); }} className="nav-button">
+                            Painel de Gestão
+                        </button>
+                        <button onClick={handlePatientsButtonClick} className="nav-button">
+                            Pacientes
+                        </button>
+                        <button onClick={() => { setCurrentPage('pacienteForm'); setSelectedPacienteId(null); }} className="nav-button">
+                            Novo Paciente
+                        </button>
+                        <button onClick={() => { setCurrentPage('transferReport'); setSelectedPacienteId(null); }} className="nav-button">
+                            Relatório de Transferência
+                        </button>
+                        <button onClick={() => { setCurrentPage('irasForm'); setSelectedPacienteId(null); }} className="nav-button">
+                            Formulário de IRAS
+                        </button>
+                        <button onClick={handleLogout} className="nav-button-logout-button">
+                            Sair
+                        </button>
+                    </nav>
+                </header>
+            )}
             <main className="app-main">
                 {renderPage()}
             </main>
