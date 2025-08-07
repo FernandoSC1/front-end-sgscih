@@ -17,7 +17,7 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(
         JSON.parse(localStorage.getItem('isLoggedIn')) || false
     );
-    const [currentPage, setCurrentPage] = useState(null);
+    const [currentPage, setCurrentPage] = useState('pacienteList'); // Inicia na lista de pacientes
     const [selectedPacienteId, setSelectedPacienteId] = useState(null);
 
     useEffect(() => {
@@ -38,6 +38,9 @@ function App() {
         setCurrentPage('pacienteList');
         setSelectedPacienteId(null);
     };
+
+    // Lista de páginas que NÃO devem exibir o cabeçalho principal
+    const pagesWithoutHeader = ['painelGestao', 'pacienteDetail', 'pacienteForm', 'irasForm', 'transferReport'];
 
     const renderPage = () => {
         switch (currentPage) {
@@ -81,8 +84,8 @@ function App() {
 
     return (
         <div className="app-container">
-            {/* O cabeçalho agora só aparece se a página não for 'painelGestao' */}
-            {currentPage !== 'painelGestao' && (
+            {/* O cabeçalho agora só aparece se a página NÃO estiver na lista pagesWithoutHeader */}
+            {!pagesWithoutHeader.includes(currentPage) && (
                 <header className="app-header">
                     <h1 className="app-title">Sistema de Gerenciamento SCIH</h1>
                     <nav className="main-nav">
