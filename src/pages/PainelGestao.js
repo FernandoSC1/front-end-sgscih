@@ -22,7 +22,17 @@ const PainelGestao = ({ setCurrentPage, setSelectedPacienteId }) => {
 
     return (
         <div className="container">
-            <h2 className="page-title">Painel de Gestão</h2>
+            {/* Cabeçalho específico para esta página */}
+            <div className="painel-header">
+                <h2 className="page-title">Painel de Gestão</h2>
+                <button
+                    onClick={() => setCurrentPage('pacienteList')}
+                    className="button secondary-button"
+                >
+                    Voltar
+                </button>
+            </div>
+
             <div className="tabs-container">
                 <button
                     className={`tab-button ${activeTab === 'atualizacoes' ? 'active' : ''}`}
