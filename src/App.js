@@ -7,7 +7,7 @@ import PacienteList from './pages/PacienteList';
 import PacienteForm from './pages/PacienteForm';
 import PacienteDetail from './pages/PacienteDetail';
 import TransferReport from './pages/TransferReport';
-import FormularioIRAS from './pages/FormularioIRAS';
+import FormularioIRAS from './pages/InvestigacaoIras';
 import PainelGestao from './pages/PainelGestao';
 
 // Importação do componente de Login
@@ -18,7 +18,6 @@ function App() {
         JSON.parse(localStorage.getItem('isLoggedIn')) || false
     );
     
-    // ALTERADO: O estado agora é inicializado com os valores do localStorage.
     const [currentPage, setCurrentPage] = useState(
         localStorage.getItem('currentPage') || 'pacienteList'
     );
@@ -26,14 +25,11 @@ function App() {
         JSON.parse(localStorage.getItem('selectedPacienteId')) || null
     );
 
-    // Efeito para salvar o estado de login
     useEffect(() => {
         localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
     }, [isLoggedIn]);
 
-    // NOVO: Efeito para salvar a página atual e o ID do paciente selecionado
     useEffect(() => {
-        // Se o usuário não estiver logado, não salva a página para evitar estados inconsistentes.
         if (isLoggedIn) {
             localStorage.setItem('currentPage', currentPage);
             localStorage.setItem('selectedPacienteId', JSON.stringify(selectedPacienteId));
@@ -43,13 +39,13 @@ function App() {
 
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);
-        setCurrentPage('pacienteList');
+        // ALTERADO: Direciona para a nova tela de boas-vindas
+        setCurrentPage('welcome'); 
     };
 
-    // ALTERADO: A função de logout agora limpa o estado da página do localStorage.
     const handleLogout = () => {
         setIsLoggedIn(false);
-        setCurrentPage(null); // Redireciona para a tela de login
+        setCurrentPage(null);
         localStorage.removeItem('currentPage');
         localStorage.removeItem('selectedPacienteId');
     };
@@ -59,10 +55,24 @@ function App() {
         setSelectedPacienteId(null);
     };
 
-    const pagesWithoutHeader = ['painelGestao', 'pacienteDetail', 'pacienteForm', 'irasForm', 'transferReport'];
+    // NOVO: Adicionado 'welcome' à lista de páginas sem o cabeçalho principal
+    const pagesWithoutHeader = ['welcome', 'painelGestao', 'pacienteDetail', 'pacienteForm', 'irasForm', 'transferReport'];
 
     const renderPage = () => {
         switch (currentPage) {
+            // NOVO: Case para renderizar a tela de boas-vindas
+            case 'welcome':
+                return (
+                    <div className="welcome-container">
+                        <img src="/logo_scih.png" alt="Logo SCIH" className="welcome-logo" />
+                        <button 
+                            onClick={() => setCurrentPage('pacienteList')} 
+                            className="button primary-button"
+                        >
+                            Acessar Sistema
+                        </button>
+                    </div>
+                );
             case 'pacienteList':
                 return <PacienteList setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             case 'pacienteForm':
@@ -88,7 +98,7 @@ function App() {
             case 'painelGestao':
                 return <PainelGestao setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             default:
-                return
+                return <PacienteList setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
         }
     };
 
@@ -107,6 +117,9 @@ function App() {
                 <header className="app-header">
                     <h1 className="app-title">Sistema de Gerenciamento SCIH</h1>
                     <nav className="main-nav">
+                        <button onClick={() => { setCurrentPage('painelGestao'); setSelectedPacienteId(null); }} className="nav-button">
+                            Painel de Gestão
+                        </button>
                         <button onClick={handlePatientsButtonClick} className="nav-button">
                             Pacientes
                         </button>
@@ -118,9 +131,6 @@ function App() {
                         </button>
                         <button onClick={() => { setCurrentPage('irasForm'); setSelectedPacienteId(null); }} className="nav-button">
                             Formulário de IRAS
-                        </button>
-                        <button onClick={() => { setCurrentPage('painelGestao'); setSelectedPacienteId(null); }} className="nav-button">
-                            Painel de Gestão
                         </button>
                         <button onClick={handleLogout} className="nav-button-logout-button">
                             Sair
