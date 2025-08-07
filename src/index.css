@@ -138,12 +138,12 @@ body {
 }
 
 .secondary-button {
-    background-color: #ccc;
-    color: #333;
+    background-color: #6a00ff;
+    color: #ffffff;
 }
 
 .secondary-button:hover {
-    background-color: #bbb;
+    background-color: #7b2cff;
     transform: translateY(-1px);
 }
 
@@ -732,33 +732,47 @@ body {
     }
 }
 
+
 /* ----------------------------------- */
 /* CSS ACRESCENTADO PARA A TELA DE LOGIN */
 /* ----------------------------------- */
 
 .login-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
-    padding: 20px; /* Adicionado para garantir espaçamento em telas pequenas */
-    box-sizing: border-box; /* Essencial para que o padding não cause overflow */
+    flex-direction: column; /* CHANGE: Arrange children (form and footer) in a column */
+    justify-content: center; /* Center the entire column (form + footer) vertically */
+    align-items: center;    /* Center the entire column horizontally */
+    min-height: 70vh;       /* CHANGE: Ensure it takes full viewport height for centering */
+    padding: 5px;
+    box-sizing: border-box;
+    width: 100%; /* Ensure it takes full width */
 }
+
+/* NEW: Wrapper for the form content to push the footer down */
+.login-form-content-wrapper {
+    flex-grow: 1; /* Allows this wrapper to take up all available space, pushing the footer down */
+    display: flex; /* Make this a flex container to center the form within it */
+    justify-content: center; /* Center the form horizontally within this wrapper */
+    align-items: center;    /* Center the form vertically within this wrapper */
+    width: 100%; /* Ensure it takes full width within the login-container */
+}
+
 
 .login-form {
     background-color: #ffffff;
-    padding: 30px;
+    padding: 5px;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
     text-align: center;
+    /* No changes here - existing visual styles are preserved */
 }
 
 .login-form h2 {
     color: #4a00e0;
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
     font-size: 2em;
     font-weight: bold;
 }
@@ -793,7 +807,7 @@ body {
 
 .login-form .login-button {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     background-color: #6a00ff;
     color: white;
     border: none;
@@ -807,11 +821,7 @@ body {
 
 .login-form .login-button:hover {
     background-color: #7b2cff;
-    transform: translateY(-1px);
-}
-
-.login-form .login-button:active{
-    background-color: #7864eb;
+    transform: translateY(-2px);
 }
 
 .error-message {
@@ -825,10 +835,18 @@ body {
     text-align: left;
 }
 
-.footer-page{
-    width: 90%;
-    color: rgb(158, 157, 157);
+/* Footer styles (assuming you have these or similar in your main CSS) */
+.footer {
+    padding: 0px;
     text-align: right;
+    color: rgb(136, 136, 136); /* Example text color, adjust as needed */
+    width: 100%; /* Ensure it spans the full width of its parent */
+    box-sizing: border-box;
+    flex-shrink: 0; /* Prevents the footer from shrinking */
+}
+
+.footer-box {
+    margin: 0; /* Remove default paragraph margin */
 }
 
 /* ----------------------------------- */
@@ -923,3 +941,41 @@ body {
 /* ----------------------------------- */
 /* CSS DO FORMULÁRIO DE IRAS (FIM) */
 /* ----------------------------------- */
+
+/* --- Estilos do Painel de Gestão --- */
+/* Estilo para botões que funcionam como links dentro de tabelas */
+.link-button {
+    background: none;
+    border: none;
+    color: #4a00e0; /* Cor roxa principal do tema */
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.link-button:hover {
+    color: #7b2cff; /* Roxo mais claro no hover */
+}
+
+/* Estilo para destacar o uso prolongado de antimicrobianos */
+.alerta-prolongado {
+    color: #dc3545; /* Cor vermelha de erro/alerta do tema */
+    font-weight: bold;
+}
+
+/* Garante que listas dentro das células da tabela fiquem bem formatadas */
+.painel-data-list {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.painel-data-list li {
+    padding-bottom: 4px;
+}
+
+.painel-data-list li:last-child {
+    padding-bottom: 0;
+}
