@@ -117,7 +117,6 @@ const TransferReport = ({ setCurrentPage }) => {
   return (
     <div className="container">
       <div className="painel-header">
-                <h2 className="page-title">Relatório de Transferência</h2>
                 <button
                     onClick={() => setCurrentPage('pacienteList')}
                     className="button secondary-button"
