@@ -943,7 +943,6 @@ body {
 /* ----------------------------------- */
 
 /* --- Estilos do Painel de Gestão --- */
-/* Estilo para botões que funcionam como links dentro de tabelas */
 .link-button {
     background: none;
     border: none;
@@ -959,13 +958,11 @@ body {
     color: #7b2cff; /* Roxo mais claro no hover */
 }
 
-/* Estilo para destacar o uso prolongado de antimicrobianos */
 .alerta-prolongado {
     color: #dc3545; /* Cor vermelha de erro/alerta do tema */
     font-weight: bold;
 }
 
-/* Garante que listas dentro das células da tabela fiquem bem formatadas */
 .painel-data-list {
     margin: 0;
     padding-left: 20px;
@@ -978,4 +975,23 @@ body {
 
 .painel-data-list li:last-child {
     padding-bottom: 0;
+}
+
+/* NOVO: Estilos para o cabeçalho do painel */
+.painel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Reutiliza o estilo do page-title para a borda inferior */
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+}
+
+.painel-header .page-title {
+    /* Remove os estilos de borda, margem e padding para não duplicar */
+    border: none;
+    margin: 0;
+    padding: 0;
+    text-align: left; /* Alinha o título à esquerda */
 }
