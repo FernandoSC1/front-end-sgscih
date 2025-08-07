@@ -24,7 +24,6 @@ const PainelGestao = ({ setCurrentPage, setSelectedPacienteId }) => {
         <div className="container">
             {/* Cabeçalho específico para esta página */}
             <div className="painel-header">
-                <h2 className="page-title">Painel de Gestão</h2>
                 <button
                     onClick={() => setCurrentPage('pacienteList')}
                     className="button secondary-button"
@@ -32,6 +31,8 @@ const PainelGestao = ({ setCurrentPage, setSelectedPacienteId }) => {
                     Voltar
                 </button>
             </div>
+            
+            <h2 className="page-title">Painel de Gestão</h2>
 
             <div className="tabs-container">
                 <button
