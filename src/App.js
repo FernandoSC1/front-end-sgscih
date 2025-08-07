@@ -7,7 +7,7 @@ import PacienteList from './pages/PacienteList';
 import PacienteForm from './pages/PacienteForm';
 import PacienteDetail from './pages/PacienteDetail';
 import TransferReport from './pages/TransferReport';
-import FormularioIRAS from './pages/InvestigacaoIras';
+import FormularioIRAS from './pages/FormularioIRAS';
 import PainelGestao from './pages/PainelGestao';
 
 // Importação do componente de Login
