@@ -995,3 +995,25 @@ body {
     padding: 0;
     text-align: left; /* Alinha o título à esquerda */
 }
+
+/* --- Estilos da Tela de Boas-Vindas --- */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh; /* Ocupa a maior parte da altura da tela */
+    text-align: center;
+}
+
+.welcome-logo {
+    max-width: 400px; /* Ajuste o tamanho da logo conforme necessário */
+    width: 90%;
+    margin-bottom: 40px; /* Espaço entre a logo e o botão */
+}
+
+.welcome-container .button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+}
+
