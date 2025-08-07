@@ -121,6 +121,14 @@ const PacienteList = ({ setCurrentPage, setSelectedPacienteId, searchParams, set
 
   return (
     <div className="container">
+      <div className="painel-header">
+          <button
+              onClick={() => setCurrentPage('pacienteList')}
+              className="button secondary-button"
+          >
+              Voltar
+          </button>
+      </div>
       <h2 className="page-title">
         {isSelectionMode ? 'Selecione um Paciente' : 'Todos os Pacientes Cadastrados'}
       </h2>
