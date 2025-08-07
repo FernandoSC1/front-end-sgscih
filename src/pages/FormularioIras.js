@@ -116,6 +116,15 @@ const FormularioIRAS = ({ setCurrentPage }) => {
   };
 
   return (
+    <div className="painel-header">
+                <h2 className="page-title">Formulário de Investigação de IRAS</h2>
+                <button
+                    onClick={() => setCurrentPage('pacienteList')}
+                    className="button secondary-button"
+                >
+                    Voltar
+                </button>
+            </div>
     <div className="container">
       <style>{`
         .form-grid input[name="numeroRegistro"],
