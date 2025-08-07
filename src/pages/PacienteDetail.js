@@ -97,9 +97,7 @@ const PacienteDetail = ({ setCurrentPage, selectedPacienteId, setSelectedPacient
 
   return (
     <div className="container">
-      <h2 className="page-title">Paciente: {paciente.nome}</h2>
       <div className="painel-header">
-                <h2 className="page-title">Detalhes do Paciente</h2>
                 <button
                     onClick={() => setCurrentPage('pacienteList')}
                     className="button secondary-button"
@@ -107,11 +105,9 @@ const PacienteDetail = ({ setCurrentPage, selectedPacienteId, setSelectedPacient
                     Voltar
                 </button>
             </div>
-
+      <h2 className="page-title">Paciente: {paciente.nome}</h2>
+      <h2 className="page-title">Detalhes do Paciente</h2>
       <div className="button-group top-buttons">
-        <button onClick={() => { setSelectedPacienteId(null); setCurrentPage('pacienteList'); }} className="button secondary-button">
-          Voltar
-        </button>
         <button onClick={() => { setSelectedPacienteId(paciente._id); setCurrentPage('pacienteForm'); }} className="button primary-button">
           Editar Dados
         </button>
