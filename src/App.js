@@ -7,7 +7,7 @@ import PacienteList from './pages/PacienteList';
 import PacienteForm from './pages/PacienteForm';
 import PacienteDetail from './pages/PacienteDetail';
 import TransferReport from './pages/TransferReport';
-import FormularioIRAS from './pages/FormularioIRAS';
+import FormularioIRAS from './pages/InvestigacaoIras';
 import PainelGestao from './pages/PainelGestao';
 
 // Importação do componente de Login
@@ -17,21 +17,41 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(
         JSON.parse(localStorage.getItem('isLoggedIn')) || false
     );
-    const [currentPage, setCurrentPage] = useState('pacienteList'); // Inicia na lista de pacientes
-    const [selectedPacienteId, setSelectedPacienteId] = useState(null);
+    
+    // ALTERADO: O estado agora é inicializado com os valores do localStorage.
+    const [currentPage, setCurrentPage] = useState(
+        localStorage.getItem('currentPage') || 'pacienteList'
+    );
+    const [selectedPacienteId, setSelectedPacienteId] = useState(
+        JSON.parse(localStorage.getItem('selectedPacienteId')) || null
+    );
 
+    // Efeito para salvar o estado de login
     useEffect(() => {
         localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
     }, [isLoggedIn]);
+
+    // NOVO: Efeito para salvar a página atual e o ID do paciente selecionado
+    useEffect(() => {
+        // Se o usuário não estiver logado, não salva a página para evitar estados inconsistentes.
+        if (isLoggedIn) {
+            localStorage.setItem('currentPage', currentPage);
+            localStorage.setItem('selectedPacienteId', JSON.stringify(selectedPacienteId));
+        }
+    }, [currentPage, selectedPacienteId, isLoggedIn]);
+
 
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);
         setCurrentPage('pacienteList');
     };
 
+    // ALTERADO: A função de logout agora limpa o estado da página do localStorage.
     const handleLogout = () => {
         setIsLoggedIn(false);
-        setCurrentPage(null);
+        setCurrentPage(null); // Redireciona para a tela de login
+        localStorage.removeItem('currentPage');
+        localStorage.removeItem('selectedPacienteId');
     };
 
     const handlePatientsButtonClick = () => {
@@ -39,7 +59,6 @@ function App() {
         setSelectedPacienteId(null);
     };
 
-    // Lista de páginas que NÃO devem exibir o cabeçalho principal
     const pagesWithoutHeader = ['painelGestao', 'pacienteDetail', 'pacienteForm', 'irasForm', 'transferReport'];
 
     const renderPage = () => {
@@ -84,7 +103,6 @@ function App() {
 
     return (
         <div className="app-container">
-            {/* O cabeçalho agora só aparece se a página NÃO estiver na lista pagesWithoutHeader */}
             {!pagesWithoutHeader.includes(currentPage) && (
                 <header className="app-header">
                     <h1 className="app-title">Sistema de Gerenciamento SCIH</h1>
