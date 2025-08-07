@@ -43,7 +43,7 @@ function App() {
 
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);
-        setCurrentPage('pacienteList');
+        setCurrentPage('');
     };
 
     // ALTERADO: A função de logout agora limpa o estado da página do localStorage.
