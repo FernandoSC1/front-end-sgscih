@@ -10,7 +10,7 @@ const InvestigacoesAtivas = ({ setCurrentPage, setSelectedIrasId }) => { // Prop
     useEffect(() => {
         const fetchInvestigacoes = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}/api/painel/investigacoes`);
+                const response = await fetch(`${API_BASE_URL}/painel/investigacoes`);
                 if (!response.ok) {
                     throw new Error('Falha ao buscar dados do servidor.');
                 }
