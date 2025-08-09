@@ -163,7 +163,7 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
                     <div className="form-grid">
                         <div className="form-group">
                             <label className="form-label" htmlFor="unidadeInternacao">6. Unidade de internação:</label>
-                            <select className="form-select" id="unidadeInternacao" name="unidadeInternacao" value={formData.unidadeInternacao} onChange={handleChange} disabled={isPacienteFound}>
+                            <select className="form-select" id="unidadeInternacao" name="unidadeInternacao" value={formData.unidadeInternacao} onChange={handleChange} >
                                 <option value="">Selecione</option>
                                 <option value="Clinica Medica">Clinica Medica</option>
                                 <option value="Clinica Cirúrgica">Clinica Cirúrgica</option>
