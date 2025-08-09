@@ -1,17 +1,16 @@
 // components/painel/InvestigacoesAtivas.js
 import React, { useState, useEffect } from 'react';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
-
-const InvestigacoesAtivas = ({ setCurrentPage, setSelectedPacienteId }) => {
+const InvestigacoesAtivas = ({ setCurrentPage, setSelectedIrasId }) => { // Prop alterada/adicionada
     const [investigacoes, setInvestigacoes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const API_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
     useEffect(() => {
         const fetchInvestigacoes = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}/painel/investigacoes`);
+                const response = await fetch(`${API_URL}/api/painel/investigacoes`);
                 if (!response.ok) {
                     throw new Error('Falha ao buscar dados do servidor.');
                 }
@@ -25,11 +24,12 @@ const InvestigacoesAtivas = ({ setCurrentPage, setSelectedPacienteId }) => {
         };
 
         fetchInvestigacoes();
-    }, []);
+    }, [API_URL]);
 
-    const handlePacienteClick = (pacienteId) => {
-        setSelectedPacienteId(pacienteId);
-        setCurrentPage('pacienteDetail');
+    // NOVO: Função para lidar com o clique na investigação
+    const handleIrasClick = (irasId) => {
+        setSelectedIrasId(irasId);
+        setCurrentPage('irasForm');
     };
     
     const formatDate = (dateString) => {
@@ -58,7 +58,8 @@ const InvestigacoesAtivas = ({ setCurrentPage, setSelectedPacienteId }) => {
                         {investigacoes.map((item) => (
                             <tr key={item._id}>
                                 <td>
-                                    <button onClick={() => handlePacienteClick(item.pacienteInfo._id)} className="link-button">
+                                    {/* ALTERADO: OnClick agora chama a nova função */}
+                                    <button onClick={() => handleIrasClick(item._id)} className="link-button">
                                         {item.pacienteInfo.numeroZeroDia}
                                     </button>
                                 </td>
