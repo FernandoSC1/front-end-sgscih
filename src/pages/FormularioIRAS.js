@@ -16,21 +16,23 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
     const [formData, setFormData] = useState(initialState);
     const [isPacienteFound, setIsPacienteFound] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+    // CORREÇÃO: A definição da URL base agora segue o padrão dos outros componentes
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
 
     useEffect(() => {
         const fetchInvestigationData = async () => {
             if (selectedIrasId) {
                 setIsEditMode(true);
                 try {
-                    const response = await axios.get(`${API_BASE_URL}/api/investigacao-iras/id/${selectedIrasId}`);
+                    // CORREÇÃO: O caminho da rota foi ajustado para não duplicar o '/api'
+                    const response = await axios.get(`${API_BASE_URL}/investigacao-iras/id/${selectedIrasId}`);
                     const data = response.data;
                     
                     if (data.dataAdmissao) data.dataAdmissao = new Date(data.dataAdmissao).toISOString().split('T')[0];
                     if (data.dataPrimeiroSinal) data.dataPrimeiroSinal = new Date(data.dataPrimeiroSinal).toISOString().split('T')[0];
 
                     setFormData(data);
-                    setIsPacienteFound(true); // Bloqueia os campos do paciente
+                    setIsPacienteFound(true);
                 } catch (error) {
                     console.error("Erro ao buscar dados da investigação:", error);
                     alert("Falha ao carregar os dados da investigação.");
@@ -52,7 +54,7 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
             return;
         }
         try {
-            const response = await axios.get(`${API_BASE_URL}/api/pacientes/numeroZeroDia/${numero}`);
+            const response = await axios.get(`${API_BASE_URL}/pacientes/numeroZeroDia/${numero}`);
             const { nome, dataAdmissao, dataNascimento, leito, setor, sexo } = response.data;
             const birthDate = new Date(dataNascimento);
             const ageInMs = Date.now() - birthDate.getTime();
@@ -90,10 +92,10 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
         e.preventDefault();
         try {
             if (isEditMode) {
-                await axios.put(`${API_BASE_URL}/api/investigacao-iras/${selectedIrasId}`, formData);
+                await axios.put(`${API_BASE_URL}/investigacao-iras/${selectedIrasId}`, formData);
                 alert('Formulário de IRAS atualizado com sucesso!');
             } else {
-                await axios.post(`${API_BASE_URL}/api/investigacao-iras`, formData);
+                await axios.post(`${API_BASE_URL}/investigacao-iras`, formData);
                 alert('Formulário de IRAS salvo com sucesso!');
             }
             setSelectedIrasId(null);
@@ -104,25 +106,20 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
         }
     };
 
-    const handleVoltar = () => {
-        setSelectedIrasId(null);
-        // Alterado para corresponder à navegação das outras páginas
-        setCurrentPage('pacienteList');
-    };
-
     return (
         <div className="container">
             <div className="painel-header">
-                <button
-                    onClick={() => setCurrentPage('pacienteList')}
+                <h2 className="page-title">{isEditMode ? 'Detalhes da Investigação' : 'Formulário de Investigação de IRAS'}</h2>
+                <button 
+                    onClick={() => {
+                        setSelectedIrasId(null);
+                        setCurrentPage('pacienteList');
+                    }} 
                     className="button secondary-button"
                 >
                     Voltar
                 </button>
             </div>
-            
-            <h2 className="page-title">{isEditMode ? 'Detalhes da Investigação' : 'Formulário de Investigação de IRAS'}</h2>
-
             <form onSubmit={handleSubmit} className="data-form">
                 {/* Seção de Dados do Paciente */}
                 <div className="form-section">
