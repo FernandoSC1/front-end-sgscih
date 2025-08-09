@@ -1,11 +1,12 @@
 // components/painel/InvestigacoesAtivas.js
 import React, { useState, useEffect } from 'react';
 
-const InvestigacoesAtivas = ({ setCurrentPage, setSelectedIrasId }) => { // Prop alterada/adicionada
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
+
+const InvestigacoesAtivas = ({ setCurrentPage, setSelectedIrasId }) => {
     const [investigacoes, setInvestigacoes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
     useEffect(() => {
         const fetchInvestigacoes = async () => {
@@ -24,9 +25,8 @@ const InvestigacoesAtivas = ({ setCurrentPage, setSelectedIrasId }) => { // Prop
         };
 
         fetchInvestigacoes();
-    }, [API_BASE_URL]);
+    }, []);
 
-    // NOVO: Função para lidar com o clique na investigação
     const handleIrasClick = (irasId) => {
         setSelectedIrasId(irasId);
         setCurrentPage('irasForm');
@@ -58,7 +58,6 @@ const InvestigacoesAtivas = ({ setCurrentPage, setSelectedIrasId }) => { // Prop
                         {investigacoes.map((item) => (
                             <tr key={item._id}>
                                 <td>
-                                    {/* ALTERADO: OnClick agora chama a nova função */}
                                     <button onClick={() => handleIrasClick(item._id)} className="link-button">
                                         {item.pacienteInfo.numeroZeroDia}
                                     </button>
