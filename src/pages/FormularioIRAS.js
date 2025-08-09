@@ -18,7 +18,7 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
     const [isPacienteFound, setIsPacienteFound] = useState(false);
     // NOVO: Estado para controlar se o formulário está em modo de edição
     const [isEditMode, setIsEditMode] = useState(false);
-    const API_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+    const API_BASE_URL  = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
     // NOVO: useEffect para buscar dados da investigação quando em modo de edição
     useEffect(() => {
@@ -26,7 +26,7 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
             if (selectedIrasId) {
                 setIsEditMode(true);
                 try {
-                    const response = await axios.get(`${API_URL}/api/investigacao-iras/id/${selectedIrasId}`);
+                    const response = await axios.get(`${API_BASE_URL }/api/investigacao-iras/id/${selectedIrasId}`);
                     const data = response.data;
                     
                     // Formata as datas para o formato yyyy-MM-dd que o input[type=date] espera
@@ -48,7 +48,7 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
         };
 
         fetchInvestigationData();
-    }, [selectedIrasId, API_URL]);
+    }, [selectedIrasId, API_BASE_URL ]);
 
     const searchPatientData = async () => {
         // ... (lógica de busca de paciente permanece a mesma)
@@ -64,11 +64,11 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
         try {
             if (isEditMode) {
                 // Atualiza um registro existente
-                await axios.put(`${API_URL}/api/investigacao-iras/${selectedIrasId}`, formData);
+                await axios.put(`${API_BASE_URL }/api/investigacao-iras/${selectedIrasId}`, formData);
                 alert('Formulário de IRAS atualizado com sucesso!');
             } else {
                 // Cria um novo registro
-                await axios.post(`${API_URL}/api/investigacao-iras`, formData);
+                await axios.post(`${API_BASE_URL }/api/investigacao-iras`, formData);
                 alert('Formulário de IRAS salvo com sucesso!');
             }
             setSelectedIrasId(null); // Limpa o ID após a operação
