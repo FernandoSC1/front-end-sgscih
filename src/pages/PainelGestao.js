@@ -5,9 +5,6 @@ import UsoAntimicrobianos from '../components/painel/UsoAntimicrobianos';
 import InvestigacoesAtivas from '../components/painel/InvestigacoesAtivas';
 
 const PainelGestao = ({ setCurrentPage, setSelectedPacienteId, setSelectedIrasId }) => {
-    // DEBUG: Adicionado para verificar se a prop está a ser recebida
-    console.log('A função setSelectedIrasId é do tipo:', typeof setSelectedIrasId);
-
     const [activeTab, setActiveTab] = useState('atualizacoes');
 
     const renderContent = () => {
@@ -17,7 +14,6 @@ const PainelGestao = ({ setCurrentPage, setSelectedPacienteId, setSelectedIrasId
             case 'usoAtm':
                 return <UsoAntimicrobianos setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             case 'investigacoes':
-                // A função é passada como prop para InvestigacoesAtivas
                 return <InvestigacoesAtivas setCurrentPage={setCurrentPage} setSelectedIrasId={setSelectedIrasId} />;
             default:
                 return <AtualizacoesDiarias setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
