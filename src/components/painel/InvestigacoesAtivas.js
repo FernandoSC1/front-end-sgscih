@@ -24,7 +24,7 @@ const InvestigacoesAtivas = ({ setCurrentPage, setSelectedIrasId }) => { // Prop
         };
 
         fetchInvestigacoes();
-    }, [API_URL]);
+    }, [API_BASE_URL]);
 
     // NOVO: Função para lidar com o clique na investigação
     const handleIrasClick = (irasId) => {
