@@ -14,7 +14,7 @@ const PainelGestao = ({ setCurrentPage, setSelectedPacienteId, setSelectedIrasId
             case 'usoAtm':
                 return <UsoAntimicrobianos setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             case 'investigacoes':
-                // CORREÇÃO: A propriedade setSelectedIrasId agora está sendo passada corretamente.
+                // A correção está aqui, garantindo que setSelectedIrasId seja passado
                 return <InvestigacoesAtivas setCurrentPage={setCurrentPage} setSelectedIrasId={setSelectedIrasId} />;
             default:
                 return <AtualizacoesDiarias setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
