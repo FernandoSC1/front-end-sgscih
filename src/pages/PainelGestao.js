@@ -14,7 +14,7 @@ const PainelGestao = ({ setCurrentPage, setSelectedPacienteId, setSelectedIrasId
             case 'usoAtm':
                 return <UsoAntimicrobianos setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             case 'investigacoes':
-                // A correção está aqui, garantindo que setSelectedIrasId seja passado
+                // A função é passada como prop para InvestigacoesAtivas
                 return <InvestigacoesAtivas setCurrentPage={setCurrentPage} setSelectedIrasId={setSelectedIrasId} />;
             default:
                 return <AtualizacoesDiarias setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
