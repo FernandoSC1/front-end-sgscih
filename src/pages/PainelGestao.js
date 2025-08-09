@@ -5,6 +5,9 @@ import UsoAntimicrobianos from '../components/painel/UsoAntimicrobianos';
 import InvestigacoesAtivas from '../components/painel/InvestigacoesAtivas';
 
 const PainelGestao = ({ setCurrentPage, setSelectedPacienteId, setSelectedIrasId }) => {
+    // DEBUG: Adicionado para verificar se a prop está a ser recebida
+    console.log('A função setSelectedIrasId é do tipo:', typeof setSelectedIrasId);
+
     const [activeTab, setActiveTab] = useState('atualizacoes');
 
     const renderContent = () => {
