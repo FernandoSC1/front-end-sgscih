@@ -5,12 +5,12 @@ const InvestigacoesAtivas = ({ setCurrentPage, setSelectedIrasId }) => { // Prop
     const [investigacoes, setInvestigacoes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const API_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
     useEffect(() => {
         const fetchInvestigacoes = async () => {
             try {
-                const response = await fetch(`${API_URL}/api/painel/investigacoes`);
+                const response = await fetch(`${API_BASE_URL}/api/painel/investigacoes`);
                 if (!response.ok) {
                     throw new Error('Falha ao buscar dados do servidor.');
                 }
