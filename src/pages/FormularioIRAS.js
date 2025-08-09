@@ -113,12 +113,15 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
     return (
         <div className="container">
             <div className="painel-header">
-                <button onClick={handleVoltar} className="button secondary-button">
+                <button
+                    onClick={() => setCurrentPage('pacienteList')}
+                    className="button secondary-button"
+                >
                     Voltar
                 </button>
             </div>
             
-        <h2 className="page-title">{isEditMode ? 'Detalhes da Investigação' : 'Formulário de Investigação de IRAS'}</h2>
+            <h2 className="page-title">{isEditMode ? 'Detalhes da Investigação' : 'Formulário de Investigação de IRAS'}</h2>
 
             <form onSubmit={handleSubmit} className="data-form">
                 {/* Seção de Dados do Paciente */}
