@@ -106,17 +106,20 @@ const FormularioIRAS = ({ setCurrentPage, selectedIrasId, setSelectedIrasId }) =
 
     const handleVoltar = () => {
         setSelectedIrasId(null);
-        setCurrentPage('painelGestao');
+        // Alterado para corresponder à navegação das outras páginas
+        setCurrentPage('pacienteList');
     };
 
     return (
         <div className="container">
             <div className="painel-header">
-                <h2 className="page-title">{isEditMode ? 'Detalhes da Investigação' : 'Formulário de Investigação de IRAS'}</h2>
                 <button onClick={handleVoltar} className="button secondary-button">
                     Voltar
                 </button>
             </div>
+            
+        <h2 className="page-title">{isEditMode ? 'Detalhes da Investigação' : 'Formulário de Investigação de IRAS'}</h2>
+
             <form onSubmit={handleSubmit} className="data-form">
                 {/* Seção de Dados do Paciente */}
                 <div className="form-section">
