@@ -2,27 +2,26 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 
-// Importações das "páginas"
 import PacienteList from './pages/PacienteList';
 import PacienteForm from './pages/PacienteForm';
 import PacienteDetail from './pages/PacienteDetail';
 import TransferReport from './pages/TransferReport';
 import FormularioIRAS from './pages/FormularioIRAS';
 import PainelGestao from './pages/PainelGestao';
-
-// Importação do componente de Login
 import Login from './login/Login';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(
         JSON.parse(localStorage.getItem('isLoggedIn')) || false
     );
-    
     const [currentPage, setCurrentPage] = useState(
         localStorage.getItem('currentPage') || 'pacienteList'
     );
     const [selectedPacienteId, setSelectedPacienteId] = useState(
         JSON.parse(localStorage.getItem('selectedPacienteId')) || null
+    );
+    const [selectedIrasId, setSelectedIrasId] = useState(
+        JSON.parse(localStorage.getItem('selectedIrasId')) || null
     );
 
     useEffect(() => {
@@ -33,9 +32,13 @@ function App() {
         if (isLoggedIn && currentPage !== 'welcome') {
             localStorage.setItem('currentPage', currentPage);
             localStorage.setItem('selectedPacienteId', JSON.stringify(selectedPacienteId));
+            localStorage.setItem('selectedIrasId', JSON.stringify(selectedIrasId));
+        } else if (!isLoggedIn) {
+            localStorage.removeItem('currentPage');
+            localStorage.removeItem('selectedPacienteId');
+            localStorage.removeItem('selectedIrasId');
         }
-    }, [currentPage, selectedPacienteId, isLoggedIn]);
-
+    }, [currentPage, selectedPacienteId, selectedIrasId, isLoggedIn]);
 
     const handleLoginSuccess = () => {
         setIsLoggedIn(true);
@@ -47,6 +50,7 @@ function App() {
         setCurrentPage(null);
         localStorage.removeItem('currentPage');
         localStorage.removeItem('selectedPacienteId');
+        localStorage.removeItem('selectedIrasId');
     };
 
     const handlePatientsButtonClick = () => {
@@ -54,38 +58,30 @@ function App() {
         setSelectedPacienteId(null);
     };
 
+    const pagesWithoutHeader = ['welcome', 'pacienteList', 'painelGestao', 'pacienteDetail', 'pacienteForm', 'irasForm', 'transferReport'];
+
     const renderPage = () => {
         switch (currentPage) {
             case 'welcome':
                 return (
                     <div className="container welcome-container">
+                        <h2 className="page-title">Bem-vindo ao Sistema!</h2>
                         <img src="/logo_scih.png" alt="Logo SCIH" className="welcome-logo" />
                     </div>
                 );
             case 'pacienteList':
                 return <PacienteList setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
             case 'pacienteForm':
-                return (
-                    <PacienteForm
-                        setCurrentPage={setCurrentPage}
-                        selectedPacienteId={selectedPacienteId}
-                        setSelectedPacienteId={setSelectedPacienteId}
-                    />
-                );
+                return <PacienteForm setCurrentPage={setCurrentPage} selectedPacienteId={selectedPacienteId} setSelectedPacienteId={setSelectedPacienteId} />;
             case 'pacienteDetail':
-                return (
-                    <PacienteDetail
-                        setCurrentPage={setCurrentPage}
-                        selectedPacienteId={selectedPacienteId}
-                        setSelectedPacienteId={setSelectedPacienteId}
-                    />
-                );
+                return <PacienteDetail setCurrentPage={setCurrentPage} selectedPacienteId={selectedPacienteId} setSelectedPacienteId={setSelectedPacienteId} />;
             case 'transferReport':
                 return <TransferReport setCurrentPage={setCurrentPage} />;
             case 'irasForm':
-                return <FormularioIRAS setCurrentPage={setCurrentPage} />;
+                return <FormularioIRAS setCurrentPage={setCurrentPage} selectedIrasId={selectedIrasId} setSelectedIrasId={setSelectedIrasId} />;
             case 'painelGestao':
-                return <PainelGestao setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
+                // A correção está aqui, garantindo que a função é passada
+                return <PainelGestao setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} setSelectedIrasId={setSelectedIrasId} />;
             default:
                 return <PacienteList setCurrentPage={setCurrentPage} setSelectedPacienteId={setSelectedPacienteId} />;
         }
@@ -102,29 +98,16 @@ function App() {
 
     return (
         <div className="app-container">
-            {/* O cabeçalho principal agora aparece SOMENTE na página 'welcome' */}
             {currentPage === 'welcome' && (
                 <header className="app-header">
                     <h1 className="app-title">Sistema de Gerenciamento SCIH</h1>
                     <nav className="main-nav">
-                        <button onClick={() => { setCurrentPage('painelGestao'); setSelectedPacienteId(null); }} className="nav-button">
-                            Painel de Gestão
-                        </button>
-                        <button onClick={handlePatientsButtonClick} className="nav-button">
-                            Pacientes
-                        </button>
-                        <button onClick={() => { setCurrentPage('pacienteForm'); setSelectedPacienteId(null); }} className="nav-button">
-                            Novo Paciente
-                        </button>
-                        <button onClick={() => { setCurrentPage('transferReport'); setSelectedPacienteId(null); }} className="nav-button">
-                            Relatório de Transferência
-                        </button>
-                        <button onClick={() => { setCurrentPage('irasForm'); setSelectedPacienteId(null); }} className="nav-button">
-                            Formulário de IRAS
-                        </button>
-                        <button onClick={handleLogout} className="nav-button-logout-button">
-                            Sair
-                        </button>
+                        <button onClick={() => { setCurrentPage('painelGestao'); setSelectedPacienteId(null); }} className="nav-button">Painel de Gestão</button>
+                        <button onClick={handlePatientsButtonClick} className="nav-button">Pacientes</button>
+                        <button onClick={() => { setCurrentPage('pacienteForm'); setSelectedPacienteId(null); }} className="nav-button">Novo Paciente</button>
+                        <button onClick={() => { setCurrentPage('transferReport'); setSelectedPacienteId(null); }} className="nav-button">Relatório de Transferência</button>
+                        <button onClick={() => { setCurrentPage('irasForm'); setSelectedIrasId(null); }} className="nav-button">Formulário de IRAS</button>
+                        <button onClick={handleLogout} className="nav-button-logout-button">Sair</button>
                     </nav>
                 </header>
             )}
